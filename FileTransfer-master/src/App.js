@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Flex, HStack, Input, Text, VStack } from "@chakra-ui/react";
 
-function App() {
+const { useState } = require("react")
+
+const FileTransfer = (props) => {
+  const [file, setFile] = useState();
+
+  function selectFile(e){
+    setFile(e.target.files[0]);
+  }
+
+  function sendFile(e){
+    console.log(file);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex justifyContent="center" alignItems="center">
+      <VStack>
+      <Text fontWeight="bold">Select Your File to Share!</Text>
+        <Input onChange={selectFile} type="file" pt={1}/>
+        <Button onClick={sendFile}>Send File</Button>
+      </VStack>
+    </Flex>
   );
+
 }
 
-export default App;
+export default FileTransfer
