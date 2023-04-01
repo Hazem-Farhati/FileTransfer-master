@@ -6,6 +6,7 @@ import socketIOClient from "socket.io-client";
 export default function Home() {
   const socket = useRef();
   const [file, setFile] = useState();
+  const [text, setText] = useState();
 
   function selectFile(e) {
     setFile(e.target.files[0]);
@@ -22,7 +23,7 @@ export default function Home() {
     socket.current.on("connect", () => {
       console.log("client connected");
     });
-    socket.current.on("return", (msg) => {console.log("File shared ",msg.file)});
+    socket.current.on("return", (msg) => {setText("File shared is " + msg.file)});
     return () => {
       socket.current.off("connect");
       socket.current.off("return");
@@ -36,6 +37,7 @@ export default function Home() {
           <Text fontWeight="bold">Select Your File to Share!</Text>
           <Input onChange={selectFile} type="file" pt={1} />
           <Button onClick={sendFile}>Send File</Button>
+          <p>{text}</p>
         </VStack>
       </Flex>
     </div>
