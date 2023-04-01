@@ -22,7 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "front": "npm start",
+    "front": "react-scripts start",
     "back": "cd backend && nodemon server.js",
     "dev": "concurrently \"npm run back\" \"npm run front\""
   },
